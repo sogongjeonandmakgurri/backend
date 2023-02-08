@@ -33,8 +33,13 @@ public class SubwayLocationService {
         // repository에서 근처 역 LIST 받아오기
         System.out.println(subwayLocationRequestDto.getLng());
         System.out.println(subwayLocationRequestDto.getLat());
-        return entityListToResponseList(subwayLocationRepository.
-                findCurrentSubwayStationByPosition(subwayLocationRequestDto.getLng(),subwayLocationRequestDto.getLat())).get(0);
+        try{
+            return entityListToResponseList(subwayLocationRepository.
+                    findCurrentSubwayStationByPosition(subwayLocationRequestDto.getLng(),subwayLocationRequestDto.getLat())).get(0);
+        }catch (Exception e){
+            return new SubwayLocationResponseDto(0, "정보 업데이트 중입니다.");
+        }
+
     }
 
     @Transactional

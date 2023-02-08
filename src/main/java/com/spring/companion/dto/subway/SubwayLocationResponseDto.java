@@ -11,4 +11,8 @@ public class SubwayLocationResponseDto {
 
     private String sub_name;
 
+    public SubwayLocationResponseDto(Integer line, String sub_name){
+        this.line=line;
+        this.sub_name=new String(sub_name);
+    }
 }
