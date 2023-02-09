@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,16 +29,29 @@ public class SubwayLocationService {
 //                findCurrentSubwayStationByPosition(subwayLocationRequestDto.getLng(),subwayLocationRequestDto.getLat()));
 //    }
 
+//    @Transactional
+//    public SubwayLocationResponseDto getSubwayStationList(SubwayLocationRequestDto subwayLocationRequestDto){
+//        // repository에서 근처 역 LIST 받아오기
+//        System.out.println(subwayLocationRequestDto.getLng());
+//        System.out.println(subwayLocationRequestDto.getLat());
+//        try{
+//            return entityListToResponseList(subwayLocationRepository.
+//                    findCurrentSubwayStationByPosition(subwayLocationRequestDto.getLng(),subwayLocationRequestDto.getLat())).get(0);
+//        }catch (Exception e){
+//            return new SubwayLocationResponseDto(0, "정보 업데이트 중입니다.");
+//        }
+//
+//    }
     @Transactional
-    public SubwayLocationResponseDto getSubwayStationList(SubwayLocationRequestDto subwayLocationRequestDto){
+    public List<SubwayLocationResponseDto> getSubwayStationList(SubwayLocationRequestDto subwayLocationRequestDto){
         // repository에서 근처 역 LIST 받아오기
         System.out.println(subwayLocationRequestDto.getLng());
         System.out.println(subwayLocationRequestDto.getLat());
         try{
             return entityListToResponseList(subwayLocationRepository.
-                    findCurrentSubwayStationByPosition(subwayLocationRequestDto.getLng(),subwayLocationRequestDto.getLat())).get(0);
+                    findCurrentSubwayStationByPosition(subwayLocationRequestDto.getLng(),subwayLocationRequestDto.getLat()));
         }catch (Exception e){
-            return new SubwayLocationResponseDto(0, "정보 업데이트 중입니다.");
+            return new ArrayList<>();
         }
 
     }

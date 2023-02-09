@@ -19,8 +19,13 @@ public class SubwayLocationController {
 //    public List<SubwayLocationResponseDto> currentSubwayLocation(@RequestBody SubwayLocationRequestDto subwayLocationRequestDto){
 //        return subwayLocationService.getSubwayStationList(subwayLocationRequestDto);
 //    }
+//    @PostMapping("/subway/loc")
+//    public SubwayLocationResponseDto currentSubwayLocation(@RequestBody SubwayLocationRequestDto subwayLocationRequestDto){
+//        return subwayLocationService.getSubwayStationList(subwayLocationRequestDto);
+//    }
+
     @PostMapping("/subway/loc")
-    public SubwayLocationResponseDto currentSubwayLocation(@RequestBody SubwayLocationRequestDto subwayLocationRequestDto){
+    public List<SubwayLocationResponseDto> currentSubwayLocation(@RequestBody SubwayLocationRequestDto subwayLocationRequestDto){
         return subwayLocationService.getSubwayStationList(subwayLocationRequestDto);
     }
 

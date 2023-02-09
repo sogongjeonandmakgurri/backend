@@ -1,5 +1,6 @@
 package com.spring.companion.controller.elevator;
 
+import com.spring.companion.dto.elevator.ElevatorLocationRequestDto;
 import com.spring.companion.dto.elevator.ExternalElevatorResponseDto;
 import com.spring.companion.dto.elevator.InternalElevatorResponseDto;
 import com.spring.companion.service.elevator.ElevatorLocationIntoService;
@@ -17,19 +18,18 @@ public class ElevatorLocationController {
     private final ElevatorLocationIntoService elevatorLocationIntoService;
     private final ElevatorLocationOutService elevatorLocationOutService;
 
-    @GetMapping("/elevator/in")
-    public List<ExternalElevatorResponseDto> intoSubwayStation(@RequestParam Map<String, Integer> line, @RequestParam Map<String, String> sub_name){
-        System.out.println(line);
-        System.out.println(sub_name);
+    @PostMapping("/elevator/in")
+    public List<ExternalElevatorResponseDto> intoSubwayStation(@RequestBody ElevatorLocationRequestDto elevatorLocationRequestDto){
+        System.out.println(elevatorLocationRequestDto);
         // 지하철역 출구 엘리베이터 조회 (외부 엘리베이터)
-        return elevatorLocationIntoService.getExternalElevator(line, sub_name);
+        return elevatorLocationIntoService.getExternalElevator(elevatorLocationRequestDto);
     }
 
     // 승강장 번호 정보
-    @GetMapping("/elevator/out")
-    public List<InternalElevatorResponseDto> getOutOfSubwayStation(@RequestParam Map<String, Integer> line, Map<String, String> sub_name){
+    @PostMapping("/elevator/out")
+    public List<InternalElevatorResponseDto> getOutOfSubwayStation(@RequestBody ElevatorLocationRequestDto elevatorLocationRequestDto){
         // 지하철역 내부에 있는 엘리베이터 조회
-        return elevatorLocationOutService.getInternalElevator(line, sub_name);
+        return elevatorLocationOutService.getInternalElevator(elevatorLocationRequestDto);
     }
 
 
